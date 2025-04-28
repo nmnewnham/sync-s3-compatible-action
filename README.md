@@ -1,6 +1,6 @@
 # Sync S3-Compatible Action
 
-The `sync-s3-compatible-action` is a GitHub action which can sync a directory to an S3-compatible storage. Currently supports:
+The `sync-s3-compatible-action` is a GitHub Action designed to synchronize files from a local directory to various S3-compatible cloud storage services. Works with:
 
 - AWS S3
 - CloudFlare R2
@@ -8,31 +8,31 @@ The `sync-s3-compatible-action` is a GitHub action which can sync a directory to
 - QCloud COS
 - Baidu Cloud BOS
 
-This action only updates the changed files by comparing local directory and cloud storage.
+The action performs intelligent synchronization by comparing the local directory with the remote storage and only uploading new or modified files.
 
 ## Environment Variables
 
 The `sync-s3-compatible-action` takes the following environment variables as inputs:
 
-| Name               | Default Value | Required | Description                   |
-|--------------------|---------------|----------|-------------------------------|
-| SYNC_DIR           | `_site`       | No       | Source directory to sync      |
-| SYNC_TYPE          | `aws`         | No       | Cloud storage provider        |
-| SYNC_BUCKET        |               | Yes      | Bucket name.                  |
-| SYNC_REGION        |               | Yes      | Region name.                  |
-| SYNC_ACCESS_ID     |               | Yes      | API access id.                |
-| SYNC_ACCESS_SECRET |               | Yes      | API aceess secret.            |
-| SYNC_OPT_UNUSED    | `keep`        | No       | How to process files exist on cloud storage but not exist in local. |
+| Name               | Default | Required | Description                                                    |
+|--------------------|---------|----------|----------------------------------------------------------------|
+| SYNC_DIR           | `_site` | No       | Source directory to synchronize.                               |
+| SYNC_TYPE          | `aws`   | No       | Cloud storage provider type.                                   |
+| SYNC_BUCKET        |         | Yes      | Storage bucket name.                                           |
+| SYNC_REGION        |         | Yes      | Region name or identifier.                                     |
+| SYNC_ACCESS_ID     |         | Yes      | API access ID.                                                 |
+| SYNC_ACCESS_SECRET |         | Yes      | API aceess secret.                                             |
+| SYNC_OPT_UNUSED    | `keep`  | No       | How to handle files on cloud storage that don't exist locally. |
 
 ## Notes
 
-- `SYNC_ACCESS_ID` and `SYNC_ACCESS_SECRET` are confidential and should NOT be written in GitHub action yaml. Add these values as [encrypted secrets](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions) and pass the secrets as inputs.
+- `SYNC_ACCESS_ID` and `SYNC_ACCESS_SECRET` are confidential and should NOT be written in GitHub action yaml. Add these values as [encrypted secrets](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions) and pass the secrets as env inputs.
 - Files which exist on cloud storage but not exist in local directory will be **keeped** by default. To remove unused files you must set `SYNC_OPT_UNUSED` to `delete` explicitly.
-- Default value of `SYNC_DIR` is `_site`, which is useful to sync generated GitHub page to cloud storage.
+- Default value of `SYNC_DIR` is `_site`, which is specifically chosen to make it seamless to sync GitHub Pages content to cloud storage providers.
 
 ## Example
 
-An example of GitHub action shows how to generate GitHub pages and sync `_site` to AWS S3:
+An example of GitHub Action shows how to generate GitHub pages and sync `_site` to AWS S3:
 
 ```yaml
 # build-and-sync.yml
