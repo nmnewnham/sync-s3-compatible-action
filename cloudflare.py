@@ -9,15 +9,14 @@ def init(ctx, env):
     """
     init R2 client using S3 SDK.
     """
-    # get region
+    # get region as account id:
     region = env[util.SYNC_REGION]
-    if not region.endswith(".r2.cloudflarestorage.com"):
-        region = region + ".r2.cloudflarestorage.com"
     # get access keys from env:
     accessId = env[util.SYNC_ACCESS_ID]
     accessSecret = env[util.SYNC_ACCESS_SECRET]
-    # note: set region name to 'auto' for R2, and endpoint to {region}.r2.cloudflarestorage.com:
-    client = boto3.client("s3", region_name="auto", aws_access_key_id=accessId, aws_secret_access_key=accessSecret, endpoint_url=f"https://{region}")
+    endpoint_url = f"https://{region}.r2.cloudflarestorage.com"
+    # note: set region name to 'auto' for R2, and endpoint to https://{region}.r2.cloudflarestorage.com:
+    client = boto3.client("s3", region_name="auto", aws_access_key_id=accessId, aws_secret_access_key=accessSecret, endpoint_url=endpoint_url)
     # put client into ctx for later use:
     ctx["client"] = client
 
