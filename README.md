@@ -14,15 +14,15 @@ The action performs intelligent synchronization by comparing the local directory
 
 The `sync-s3-compatible-action` takes the following environment variables as inputs:
 
-| Name               | Default | Required | Description                                                    |
-|--------------------|---------|----------|----------------------------------------------------------------|
-| SYNC_DIR           | `_site` | No       | Source directory to synchronize.                               |
-| SYNC_TYPE          | `aws`   | No       | Cloud storage provider type.                                   |
-| SYNC_BUCKET        |         | Yes      | Storage bucket name.                                           |
-| SYNC_REGION        |         | Yes      | Region name or identifier.                                     |
-| SYNC_ACCESS_ID     |         | Yes      | API access ID.                                                 |
-| SYNC_ACCESS_SECRET |         | Yes      | API aceess secret.                                             |
-| SYNC_OPT_UNUSED    | `keep`  | No       | How to handle files on cloud storage that don't exist locally. |
+| Name               | Default | Required | Description                                                                      |
+|--------------------|---------|----------|----------------------------------------------------------------------------------|
+| SYNC_DIR           | `_site` | No       | Source directory to synchronize.                                                 |
+| SYNC_TYPE          | `aws`   | No       | Cloud storage provider type: `aws`, `cloudflare`, `aliyun`, `qcloud`, `baidu`.   |
+| SYNC_BUCKET        |         | Yes      | Storage bucket name.                                                             |
+| SYNC_REGION        |         | Yes      | Region name or identifier.                                                       |
+| SYNC_ACCESS_ID     |         | Yes      | API access ID.                                                                   |
+| SYNC_ACCESS_SECRET |         | Yes      | API aceess secret.                                                               |
+| SYNC_OPT_UNUSED    | `keep`  | No       | How to handle files on cloud storage that don't exist locally: `keep`, `delete`. |
 
 ## Notes
 
